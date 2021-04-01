@@ -16,7 +16,7 @@ let fixSingle = (data) => {
   console.log('--> Data undef: ', data.__v !== undefined);
 
   if (data.__v !== undefined) delete data.__v;
-  if (data_id) {
+  if (data._id) {
     let id = data._id;
     delete data._id;
     Object.assign(data, { id });
