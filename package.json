@@ -1,0 +1,18 @@
+{
+  "name": "labexams_app",
+  "version": "1.0.0",
+  "description": "Laboratory exams API",
+  "author": "Juliano Cassoli <jucassoli@gmail.com>",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "swagger-autogen": "node swagger.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.2",
+    "swagger-autogen": "^2.7.6",
+    "swagger-ui-express": "^4.1.6",
+    "uuid": "^8.3.2"
+  }
+}
