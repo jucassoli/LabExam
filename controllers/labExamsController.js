@@ -87,18 +87,20 @@ exports.findExamsByNome = (req, res) => {
   schema.exec(function (err, examsFound) {
     if (err) {
       res.status(500).send(err);
-    }
-    if (Array.isArray(examsFound) && examsFound.length == 0) {
-      res.status(404).send();
     } else {
-
-      if(Array.isArray(examsFound) && examsFound.length > 0) {
-
+      
+    }
+    if (Array.isArray(examsFound)) {
+      if (examsFound.length == 0) {
+        res.status(404).send();
+      } else {
+        let allExamsObjFound = [];
         examsFound.forEach(oneExam => {
+          let examObject = common.fixResponseData(oneExam);
           let exameId = oneExam._id;
           LabExam.find({ exameId }).exec(labExamsFound => {
 
-            if(Array.isArray(labExamsFound) && labExamsFound.length > 0) {
+            if (Array.isArray(labExamsFound) && labExamsFound.length > 0) {
 
               let resultLabs = [];
               labExamsFound.forEach(oneLabExam => {
@@ -107,15 +109,15 @@ exports.findExamsByNome = (req, res) => {
                   resultLabs.push(common.fixResponseData(oneLabFound));
                 });
               });
-              Object.assign(common.fixResponseData(oneExam), { laboratorios_associados: resultLabs })
+              Object.assign(examObject, { laboratorios_associados: resultLabs });
+              allExamsObjFound.push(examObject);
             }
           });
-
         });
-
+        res.json(allExamsObjFound);
       }
-
-      res.json(examsFound);
+    } else {
+      res.status(404).send();
     }
   });
 
