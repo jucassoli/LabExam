@@ -1,5 +1,6 @@
-const labController = require('../subscribers/laboratorioController');
-const examController = require('../subscribers/exameController');
+const labController = require('../controllers/laboratorioController');
+const examController = require('../controllers/exameController');
+const labExamController = require('../controllers/labExamsController');
 
 exports.routesConfig = function (app) {
 
@@ -19,5 +20,8 @@ exports.routesConfig = function (app) {
   app.post('/exame', examController.createExam);
   app.put('/exame/:id', examController.updateExam);
   app.delete('/exame/:id', examController.deleteExam);
+
+  app.post('/associar', labExamController.associate);
+  
 
 }
