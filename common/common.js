@@ -22,7 +22,6 @@ let fixSingle = (data) => {
     let id = another._id;
     delete another._id;
     Object.assign(another, { id });
-    console.log('---- got here: ', another);
   }
 
   return another;
