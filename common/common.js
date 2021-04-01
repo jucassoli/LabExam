@@ -8,6 +8,7 @@ exports.fixResponseData = (data) => {
   } else {
     fixSingle(data);
   }
+  return data;
 };
 
 let fixSingle = (data) => {
