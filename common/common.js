@@ -4,17 +4,18 @@ exports.isValidationError = (err) => {
 
 exports.fixResponseData = (data) => {
   if(Array.isArray(data)) {
-    data.forEach(item => fixSingle(item));
-  } else {
-    fixSingle(data);
+    for(i=0; i<data.length; i++) {
+      data[i] = fixSingle(data[i]);
+    }
+    return data;
   }
-  return data;
+  return fixSingle(data);
 };
 
 let fixSingle = (data) => {
-
+  let trueData = (data.toObject)? data.toObject(): data;
   let another = {
-    ...data
+    ...trueData
   };
 
   if (another.__v !== undefined) delete another.__v;
@@ -25,4 +26,6 @@ let fixSingle = (data) => {
     Object.assign(another, { id });
     console.log('---- got here: ', another);
   }
+
+  return another;
 };
