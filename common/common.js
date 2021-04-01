@@ -12,14 +12,11 @@ exports.fixResponseData = (data) => {
 };
 
 let fixSingle = (data) => {
-  console.log('--> Data begin: ', data);
-  console.log('--> Data type: ', typeof data);
-  
-  console.log('--> has data.hasOwnProperty __v', data.hasOwnProperty('__v'));
-  console.log('--> has data.hasOwnProperty _id', data.hasOwnProperty('_id'));
 
-  if (data.hasOwnProperty('__v')) delete data.__v;
-  if (data.hasOwnProperty('_id')) {
+  console.log('--> Data undef: ', data.__v !== undefined);
+
+  if (data.__v !== undefined) delete data.__v;
+  if (data_id) {
     let id = data._id;
     delete data._id;
     Object.assign(data, { id });
