@@ -9,6 +9,12 @@ const LabExamSchema = new Schema({
   exameId: {
     type: mongoose.Types.ObjectId,
     required: true
+  },
+  status: {
+    type: String,
+    enum : ['ativo','inativo'],
+    default: 'ativo',
+    required: true
   }
 });
 
