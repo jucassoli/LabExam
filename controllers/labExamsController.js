@@ -72,7 +72,7 @@ exports.findExamsByNome = (req, res) => {
 
   console.log('-- Filter: ', filter);
 
-  let schema = Exame.find(filter);
+  let examSchema = Exame.find(filter);
 
   if (req.query.limit) {
     let limit = req.query.limit <= 100 ? parseInt(req.query.limit) : 10;
@@ -83,26 +83,38 @@ exports.findExamsByNome = (req, res) => {
       page = Number.isInteger(pageNum) ? pageNum : 0;
     }
 
-    schema.limit(limit).skip(limit * page);
+    examSchema.limit(limit).skip(limit * page);
   }
 
-  schema.exec(function (err, examsFound) {
+  examSchema.exec(function (err, examsFound) {
     if (err) {
       res.status(500).send(err);
     } else {
-      console.log('--- Found examsFound: ', examsFound)
-      if (Array.isArray(examsFound)) {
-        if (examsFound.length == 0) {
-          res.status(404).send();
-        } else {
+      let allExamsObjFound = [];
+      if (Array.isArray(examsFound) && examsFound.length > 0) {
+        examsFound.forEach(oneExam => {
+          console.log('--- Get the oneExam: ', oneExam);
+          let examObject = common.fixResponseData(oneExam);
+          Object.assign(examObject, { laboratorios_associados: [] });
+          allExamsObjFound.push(examObject);
+        });
+      }
+      return allExamsObjFound;
+    }
+  }).then(resolve => {
+    console.log('---- Got then ', resolve);
 
-          let allExamsObjFound = [];
-          examsFound.forEach(oneExam => {
-            console.log('--- Found oneExam: ', oneExam)
-            let examObject = common.fixResponseData(oneExam);
-            let exameId = oneExam._id;
-            LabExam.find({ exameId }).exec(labExamsFound => {
-              console.log('--- Found labExamsFound: ', labExamsFound)
+    res.json(resolve);
+  });
+
+
+/*
+
+          LabExam.find({ exameId }).exec((err, labExamsFound) => {
+            if (err) {
+              // Didn't find anything, move foward.
+            } else {
+              console.log('--- Found labExamsFound: ', labExamsFound);
 
               if (Array.isArray(labExamsFound) && labExamsFound.length > 0) {
 
@@ -119,15 +131,9 @@ exports.findExamsByNome = (req, res) => {
                 console.log('--- Done examObject: ', examObject)
                 allExamsObjFound.push(examObject);
               }
-            });
+            }
           });
-          res.json(allExamsObjFound);
 
-        }
-      } else {
-        res.status(404).send();
-      }
-    }
-  });
+*/
 
 };
