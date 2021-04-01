@@ -13,16 +13,16 @@ exports.fixResponseData = (data) => {
 
 let fixSingle = (data) => {
 
-  console.log('--> Data undef: ', data.__v !== undefined);
+  let another = {
+    ...data
+  };
 
-  if (data.__v !== undefined) delete data.__v;
+  if (another.__v !== undefined) delete another.__v;
 
-  console.log('--> Data has id: ', data._id && true);
-
-  if (data._id) {
-    let id = data._id;
-    delete data._id;
-    Object.assign(data, { id });
-    console.log('---- got here: ', data);
+  if (another._id) {
+    let id = another._id;
+    delete another._id;
+    Object.assign(another, { id });
+    console.log('---- got here: ', another);
   }
 };
