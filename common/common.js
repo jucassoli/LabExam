@@ -12,12 +12,10 @@ exports.fixResponseData = (data) => {
 };
 
 let fixSingle = (data) => {
-  if(typeof data == "object") {
-    if (data.hasOwnProperty('__v')) delete data.__v;
-    if (data.hasOwnProperty('_id')) {
-      let id = data._id;
-      delete data._id;
-      Object.assign(data, { id });
-    }
+  if (data.hasOwnProperty('__v')) delete data.__v;
+  if (data.hasOwnProperty('_id')) {
+    let id = data._id;
+    delete data._id;
+    Object.assign(data, { id });
   }
-}
+};
