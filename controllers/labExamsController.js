@@ -46,6 +46,21 @@ let createSingle = (data, LabExamSchema) => {
   });
 };
 
+exports.findById = (req, res) => {
+  let id = req.params.id;
+  LabExam.find({ "_id": id }).exec(function (err, data) {
+    if (err) {
+      if(err.reason && Object.keys(err.reason).length === 0) {
+          res.status(404).send();
+      } else {
+        res.status(500).send(err);
+      }
+    } else {
+      res.json(common.fixResponseData(data));
+    }
+  });
+};
+
 exports.findExamsByNome = (req, res) => {
 
   let filter = Object.assign({},
