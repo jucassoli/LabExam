@@ -1,5 +1,5 @@
 exports.isValidationError = (err) => {
-  return err.err.errors && err.err.errors.status && err.err.errors.status.name == "ValidatorError"
+  return err.err && err.err.errors && err.err.errors.status && err.err.errors.status.name == "ValidatorError"
 };
 
 exports.fixResponseData = (data) => {
@@ -17,9 +17,7 @@ let fixSingle = (data) => {
   let another = {
     ...trueData
   };
-
   if (another.__v !== undefined) delete another.__v;
-
   if (another._id) {
     let id = another._id;
     delete another._id;
