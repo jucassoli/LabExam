@@ -88,36 +88,37 @@ exports.findExamsByNome = (req, res) => {
     if (err) {
       res.status(500).send(err);
     } else {
-      
-    }
-    if (Array.isArray(examsFound)) {
-      if (examsFound.length == 0) {
-        res.status(404).send();
-      } else {
-        let allExamsObjFound = [];
-        examsFound.forEach(oneExam => {
-          let examObject = common.fixResponseData(oneExam);
-          let exameId = oneExam._id;
-          LabExam.find({ exameId }).exec(labExamsFound => {
+      if (Array.isArray(examsFound)) {
+        if (examsFound.length == 0) {
+          res.status(404).send();
+        } else {
 
-            if (Array.isArray(labExamsFound) && labExamsFound.length > 0) {
+          let allExamsObjFound = [];
+          examsFound.forEach(oneExam => {
+            let examObject = common.fixResponseData(oneExam);
+            let exameId = oneExam._id;
+            LabExam.find({ exameId }).exec(labExamsFound => {
 
-              let resultLabs = [];
-              labExamsFound.forEach(oneLabExam => {
-                let laboratorioId = oneLabExam.laboratorioId;
-                Lab.findById(laboratorioId).exec(oneLabFound => {
-                  resultLabs.push(common.fixResponseData(oneLabFound));
+              if (Array.isArray(labExamsFound) && labExamsFound.length > 0) {
+
+                let resultLabs = [];
+                labExamsFound.forEach(oneLabExam => {
+                  let laboratorioId = oneLabExam.laboratorioId;
+                  Lab.findById(laboratorioId).exec(oneLabFound => {
+                    resultLabs.push(common.fixResponseData(oneLabFound));
+                  });
                 });
-              });
-              Object.assign(examObject, { laboratorios_associados: resultLabs });
-              allExamsObjFound.push(examObject);
-            }
+                Object.assign(examObject, { laboratorios_associados: resultLabs });
+                allExamsObjFound.push(examObject);
+              }
+            });
           });
-        });
-        res.json(allExamsObjFound);
+          res.json(allExamsObjFound);
+
+        }
+      } else {
+        res.status(404).send();
       }
-    } else {
-      res.status(404).send();
     }
   });
 
