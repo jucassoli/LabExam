@@ -21,7 +21,8 @@ exports.routesConfig = function (app) {
   app.put('/exame/:id', examController.updateExam);
   app.delete('/exame/:id', examController.deleteExam);
 
-  app.post('/associar', labExamController.associate);
+  app.post('/associacao', labExamController.associate);
+  app.get('/associacao/:id', labExamController.findById);
   app.post('/examesLabs', labExamController.findExamsByNome);
 
 }
