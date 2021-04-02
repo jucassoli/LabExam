@@ -9,7 +9,7 @@
   "basePath": "/",
   "tags": [
     {
-      "name": "Lab",
+      "name": "Laboratorios",
       "description": "Endpoints de acesso aos Laboratorios"
     },
     {
@@ -37,17 +37,19 @@
         "tags": [
           "Laboratorios"
         ],
-        "description": "",
+        "description": "Endpoint usado para obter uma lista de laboratorios, podendo ser todos ou filtrado.",
         "parameters": [
           {
             "name": "removido",
             "in": "query",
-            "type": "string"
+            "type": "string",
+            "description": "Indicador de laboratorio removido"
           },
           {
             "name": "status",
             "in": "query",
-            "type": "string"
+            "type": "string",
+            "description": "Status ativo ou inativo"
           },
           {
             "name": "nome",
@@ -78,7 +80,7 @@
         "tags": [
           "Laboratorios"
         ],
-        "description": "",
+        "description": "Endpoint usado para criar um laboratório.",
         "parameters": [],
         "responses": {
           "201": {
@@ -98,13 +100,15 @@
         "tags": [
           "Laboratorios"
         ],
-        "description": "",
+        "description": "Endpoint usado para um laboratório fornecendo seu id.",
+        "operationId": "id",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID do laboratório"
           }
         ],
         "responses": {
@@ -120,7 +124,7 @@
         "tags": [
           "Laboratorios"
         ],
-        "description": "",
+        "description": "Endpoint usado para atualizar um laboratório.",
         "parameters": [
           {
             "name": "id",
@@ -145,7 +149,7 @@
         "tags": [
           "Laboratorios"
         ],
-        "description": "",
+        "description": "Endpoint usado para remover logicamente um laboratório.",
         "parameters": [
           {
             "name": "id",
