@@ -121,7 +121,7 @@ exports.findExamsByNome = (req, res) => {
                 reject(err);
               } else {
                 for(le of labExamsFound) {
-                  examObject.laboratorios_associados.push(common.fixResponseData(le.laboratorioId))
+                  examObject.laboratorios_associados.push(common.fixResponseData(le.laboratorioId[0]))
                 }
                 resolve(examObject);
               }
