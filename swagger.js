@@ -17,15 +17,15 @@ const doc = {
   tags: [
     {
       "name": "Lab",
-      "description": "Endpoints"
+      "description": "Endpoints de acesso aos Laboratorios"
     },
     {
       "name": "Exames",
-      "description": "Endpoints"
+      "description": "Endpoints de acesso aos Exames"
     },
     {
       "name": "LabExams",
-      "description": "Endpoints"
+      "description": "Endpoints de acesso as associações entre Laboratorios e Exames"
     },
   ]
 };
