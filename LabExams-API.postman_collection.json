@@ -1,0 +1,498 @@
+{
+	"info": {
+		"_postman_id": "684aba2c-d882-4845-8751-d62fe9eb2f14",
+		"name": "LabExams-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cadastrar um Laboratorio",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Laboratorio-1\",\r\n    \"endereco\": \"Av Paulista, 111\",\r\n    \"status\": \"ativo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/lab",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"lab"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar Laboratorio - Lote",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n    \"nome\": \"Laboratorio-2\",\r\n    \"endereco\": \"Av Paulista, 234\",\r\n    \"status\": \"ativo\"\r\n    },\r\n    {\r\n    \"nome\": \"Laboratorio-3\",\r\n    \"endereco\": \"Av Paulista, 345\",\r\n    \"status\": \"ativo\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/lab",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"lab"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista Exames - Filtrar ativo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/exame?status=ativo",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"exame"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "ativo"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista Laboratorios - Filtrar ativo Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/lab?status=ativo",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"lab"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "ativo"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Laboratorio",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"LAB UPDATED\",\r\n    \"endereco\": \"Teste-teste-teste\",\r\n    \"status\": \"ativo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/lab/606604c9f011df001592b58c",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"lab",
+						"606604c9f011df001592b58c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Exame",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Paulo Atualizado\",\r\n    \"tipo\": \"imagem\",\r\n    \"status\": \"ativo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/exame/60661922d86d0c0013da2faa",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"exame",
+						"60661922d86d0c0013da2faa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remover logicamente Exame",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/exame/60660f81d0d0150012d863d7",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"exame",
+						"60660f81d0d0150012d863d7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remover logicamente Laboratorio Copy",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/lab/6064e88e7ea5510013e8cac8",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"lab",
+						"6064e88e7ea5510013e8cac8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar um Exame",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Juliano\",\r\n    \"tipo\": \"imagem\",\r\n    \"status\": \"ativo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/exame",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"exame"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar Exame - Lote",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"nome\": \"Nicole\",\r\n        \"tipo\": \"imagem\",\r\n        \"status\": \"ativo\"\r\n    },\r\n    {\r\n        \"nome\": \"Giovanni\",\r\n        \"tipo\": \"imagem\",\r\n        \"status\": \"ativo\"\r\n    },\r\n    {\r\n        \"nome\": \"Joao Paulo\",\r\n        \"tipo\": \"imagem\",\r\n        \"status\": \"ativo\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/exame",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"exame"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista Laboratorios ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/lab",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"lab"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "ativo",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista um Laboratorios  por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/lab/606604c4f011df001592b58a",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"lab",
+						"606604c4f011df001592b58a"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "ativo",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista um Exame por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/exame/60661922d86d0c0013da2faa",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"exame",
+						"60661922d86d0c0013da2faa"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "ativo",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista Exames - Paginacao",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/exame?limit=2&page=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"exame"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "2"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista Laboratorios - Paginacao Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/lab?limit=2&page=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"lab"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "2"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista Exames",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/exame",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"exame"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Associar Laboratorio-Exame",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"laboratorioId\": \"606600610d124000136dad7b\",\r\n    \"exameId\": \"60668a68b9db830014dcb80d\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/associacao",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"associacao"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Desassociar Laboratorio-Exame",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/associacao/6066102ed0d0150012d863d8",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"associacao",
+						"6066102ed0d0150012d863d8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista Exames com Laboratorios associados",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/examesLabs",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"examesLabs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista Exame por Nome - Laboratorios associados",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/examesLabs?nome=Nicole",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"examesLabs"
+					],
+					"query": [
+						{
+							"key": "nome",
+							"value": "Nicole"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
