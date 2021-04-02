@@ -24,7 +24,7 @@ exports.routesConfig = function (app) {
   app.post('/associacao', labExamController.associate);
   app.get('/associacao/:id', labExamController.findById);
   app.get('/associacao', labExamController.findAll);
-  app.delete('/associacao/:id', examController.deleteAssociacao);
+  app.delete('/associacao/:id', labExamController.deleteAssociacao);
 
   app.get('/examesLabs', labExamController.findExamsByNome);
 }
