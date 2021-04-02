@@ -2,6 +2,42 @@ const Exame = require("../models/exame");
 const common = require("../common/common");
 
 exports.getAllExams = (req, res) => {
+  // #swagger.tags = ['Exames']
+  // #swagger.description = 'Endpoint usado para obter uma lista de Exames, podendo ser todos ou filtrado.'
+  /* 
+    #swagger.parameters['removido'] = {
+                in: 'query',
+                type: "string",
+                description: "Indicador de Exame removido"
+        } 
+    #swagger.parameters['status'] = {
+                in: 'query',
+                type: "string",
+                description: "Status <code>ativo</code> ou <code>inativo</code>",
+                enum : ['ativo','inativo']
+        } 
+    #swagger.parameters['tipo'] = {
+                in: 'query',
+                type: "string",
+                description: "Pode ser <code>analise_clinica</code> ou <code>imagem</code>",
+                enum : ['analise_clinica','imagem']
+        } 
+    #swagger.parameters['nome'] = {
+                in: 'query',
+                type: "string",
+                description: "Nome do Exame"
+        } 
+    #swagger.parameters['limit'] = {
+                in: 'query',
+                type: "integer",
+                description: "Tamanho limite da pagina"
+        } 
+    #swagger.parameters['page'] = {
+                in: 'query',
+                type: "integer",
+                description: "Pagina corrente"
+        } 
+  */
 
   let filter = Object.assign({},
     (req.query.removido) ? { removido: req.query.removido } : { removido: false },
@@ -38,6 +74,8 @@ exports.getAllExams = (req, res) => {
 };
 
 exports.deleteExam = (req, res) => {
+  // #swagger.tags = ['Exames']
+
   let data = { removido: true };
   let id = req.params.id;
 
@@ -56,6 +94,8 @@ exports.deleteExam = (req, res) => {
 };
 
 exports.createExam = (req, res) => {
+  // #swagger.tags = ['Exames']
+
   let data = req.body;
 
   if (Array.isArray(data)) {
@@ -98,6 +138,8 @@ let createSingle = (data, ExamSchema) => {
 };
 
 exports.updateExam = (req, res) => {
+  // #swagger.tags = ['Exames']
+
   let data = req.body;
   let id = req.params.id;
 
@@ -117,6 +159,8 @@ exports.updateExam = (req, res) => {
 };
 
 exports.findById = (req, res) => {
+  // #swagger.tags = ['Exames']
+
   let id = req.params.id;
   Exame.find({ "_id": id }).exec(function (err, data) {
     if (err) {

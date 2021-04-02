@@ -4,7 +4,8 @@ const common = require("../common/common");
 exports.getAllLabs = (req, res) => {
   // #swagger.tags = ['Laboratorios']
   // #swagger.description = 'Endpoint usado para obter uma lista de laboratorios, podendo ser todos ou filtrado.'
-  /* #swagger.parameters['removido'] = {
+  /* 
+    #swagger.parameters['removido'] = {
                 in: 'query',
                 type: "string",
                 description: "Indicador de laboratorio removido"
@@ -13,6 +14,21 @@ exports.getAllLabs = (req, res) => {
                 in: 'query',
                 type: "string",
                 description: "Status ativo ou inativo"
+        } 
+    #swagger.parameters['nome'] = {
+                in: 'query',
+                type: "string",
+                description: "Nome do laboratorio"
+        } 
+    #swagger.parameters['limit'] = {
+                in: 'query',
+                type: "integer",
+                description: "Tamanho limite da pagina"
+        } 
+    #swagger.parameters['page'] = {
+                in: 'query',
+                type: "integer",
+                description: "Pagina corrente"
         } 
   */
 
@@ -52,6 +68,8 @@ exports.getAllLabs = (req, res) => {
 exports.deleteLab = (req, res) => {
   // #swagger.tags = ['Laboratorios']
   // #swagger.description = 'Endpoint usado para remover logicamente um laboratório.'
+  // #swagger.operationId = 'id'
+  // #swagger.parameters['id'] = { description: "ID do laboratório" }
 
   let data = { removido: true };
   let id = req.params.id;
@@ -118,6 +136,8 @@ let createSingle = (data, LabSchema) => {
 exports.updateLab = (req, res) => {
   // #swagger.tags = ['Laboratorios']
   // #swagger.description = 'Endpoint usado para atualizar um laboratório.'
+  // #swagger.operationId = 'id'
+  // #swagger.parameters['id'] = { description: "ID do laboratório" }
 
   let data = req.body;
   let id = req.params.id;
@@ -140,7 +160,7 @@ exports.updateLab = (req, res) => {
 exports.findById = (req, res) => {
   // #swagger.tags = ['Laboratorios']
   // #swagger.operationId = 'id'
-  //  #swagger.parameters['id'] = { description: "ID do laboratório" }
+  // #swagger.parameters['id'] = { description: "ID do laboratório" }
   // #swagger.description = 'Endpoint usado para um laboratório fornecendo seu id.'
 
   let id = req.params.id;

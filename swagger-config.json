@@ -54,17 +54,20 @@
           {
             "name": "nome",
             "in": "query",
-            "type": "string"
+            "type": "string",
+            "description": "Nome do laboratorio"
           },
           {
             "name": "limit",
             "in": "query",
-            "type": "string"
+            "type": "integer",
+            "description": "Tamanho limite da pagina"
           },
           {
             "name": "page",
             "in": "query",
-            "type": "string"
+            "type": "integer",
+            "description": "Pagina corrente"
           }
         ],
         "responses": {
@@ -125,6 +128,164 @@
           "Laboratorios"
         ],
         "description": "Endpoint usado para atualizar um laboratório.",
+        "operationId": "id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do laboratório"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Laboratorios"
+        ],
+        "description": "Endpoint usado para remover logicamente um laboratório.",
+        "operationId": "id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID do laboratório"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/exame": {
+      "get": {
+        "tags": [
+          "Exames"
+        ],
+        "description": "Endpoint usado para obter uma lista de Exames, podendo ser todos ou filtrado.",
+        "parameters": [
+          {
+            "name": "removido",
+            "in": "query",
+            "type": "string",
+            "description": "Indicador de Exame removido"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "type": "string",
+            "description": "Status <code>ativo</code> ou <code>inativo</code>",
+            "enum": [
+              "ativo",
+              "inativo"
+            ]
+          },
+          {
+            "name": "tipo",
+            "in": "query",
+            "type": "string",
+            "description": "Pode ser <code>analise_clinica</code> ou <code>imagem</code>",
+            "enum": [
+              "analise_clinica",
+              "imagem"
+            ]
+          },
+          {
+            "name": "nome",
+            "in": "query",
+            "type": "string",
+            "description": "Nome do Exame"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "integer",
+            "description": "Tamanho limite da pagina"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "type": "integer",
+            "description": "Pagina corrente"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Exames"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/exame/{id}": {
+      "get": {
+        "tags": [
+          "Exames"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Exames"
+        ],
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -147,138 +308,8 @@
       },
       "delete": {
         "tags": [
-          "Laboratorios"
+          "Exames"
         ],
-        "description": "Endpoint usado para remover logicamente um laboratório.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/exame": {
-      "get": {
-        "tags": [],
-        "description": "",
-        "parameters": [
-          {
-            "name": "removido",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "tipo",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "nome",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "tags": [],
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/exame/{id}": {
-      "get": {
-        "tags": [],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "put": {
-        "tags": [],
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "delete": {
-        "tags": [],
         "description": "",
         "parameters": [
           {
