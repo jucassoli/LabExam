@@ -91,8 +91,18 @@
         "tags": [
           "Laboratorios"
         ],
-        "description": "Endpoint usado para criar um laboratório.",
-        "parameters": [],
+        "description": "Endpoint usado para criar um laboratório ou criação em lote.",
+        "parameters": [
+          {
+            "name": "requestBody",
+            "in": "body",
+            "type": "object",
+            "description": "Indicador de laboratorio removido",
+            "exemple": {
+              "test": 123
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -346,8 +356,10 @@
     },
     "/associacao": {
       "post": {
-        "tags": [],
-        "description": "",
+        "tags": [
+          "LabExams"
+        ],
+        "description": "Endpoint usado para fazer a associação entre laboratorio e exame.",
         "parameters": [],
         "responses": {
           "201": {
@@ -362,7 +374,9 @@
         }
       },
       "get": {
-        "tags": [],
+        "tags": [
+          "LabExams"
+        ],
         "description": "",
         "parameters": [],
         "responses": {
@@ -377,7 +391,9 @@
     },
     "/associacao/{id}": {
       "get": {
-        "tags": [],
+        "tags": [
+          "LabExams"
+        ],
         "description": "",
         "parameters": [
           {
@@ -397,7 +413,9 @@
         }
       },
       "delete": {
-        "tags": [],
+        "tags": [
+          "LabExams"
+        ],
         "description": "",
         "parameters": [
           {
@@ -422,7 +440,9 @@
     },
     "/examesLabs": {
       "get": {
-        "tags": [],
+        "tags": [
+          "LabExams"
+        ],
         "description": "",
         "parameters": [
           {

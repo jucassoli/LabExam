@@ -5,6 +5,9 @@ const Exame = require("../models/exame");
 const common = require("../common/common");
 
 exports.associate = (req, res) => {
+  // #swagger.tags = ['LabExams']
+  // #swagger.description = 'Endpoint usado para fazer a associação entre laboratorio e exame.'
+
   let data = req.body;
 
   if (Array.isArray(data)) {
@@ -47,6 +50,8 @@ let createSingle = (data, LabExamSchema) => {
 };
 
 exports.findById = (req, res) => {
+  // #swagger.tags = ['LabExams']
+
   let id = req.params.id;
   LabExam.find({ "_id": id }).populate('laboratorioId').populate('exameId').exec(function (err, data) {
     if (err) {
@@ -62,6 +67,8 @@ exports.findById = (req, res) => {
 };
 
 exports.deleteAssociacao = (req, res) => {
+  // #swagger.tags = ['LabExams']
+
   let id = req.params.id;
   LabExam.findByIdAndDelete(id, function (err, data) {
     if (err) {
@@ -77,6 +84,8 @@ exports.deleteAssociacao = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
+  // #swagger.tags = ['LabExams']
+
   LabExam.find().populate('laboratorioId').populate('exameId').exec(function (err, data) {
     if (err) {
       if(err.reason && Object.keys(err.reason).length === 0) {
@@ -91,6 +100,7 @@ exports.findAll = (req, res) => {
 };
 
 exports.findExamsByNome = (req, res) => {
+  // #swagger.tags = ['LabExams']
 
   let filter = Object.assign({},
     (req.query.removido) ? { removido: req.query.removido } : { removido: false },
