@@ -2,6 +2,7 @@ const Lab = require("../models/laboratorio");
 const common = require("../common/common");
 
 exports.getAllLabs = (req, res) => {
+  // #swagger.tags = ['Laboratorios']
 
   let filter = Object.assign({}, 
     (req.query.removido)? { removido: req.query.removido } : { removido: false },
@@ -37,6 +38,8 @@ exports.getAllLabs = (req, res) => {
 };
 
 exports.deleteLab = (req, res) => {
+  // #swagger.tags = ['Laboratorios']
+
   let data = { removido: true };
   let id = req.params.id;
 
@@ -55,9 +58,11 @@ exports.deleteLab = (req, res) => {
 };
 
 exports.createLab = (req, res) => {
+  // #swagger.tags = ['Laboratorios']
+
   let data = req.body;
 
-  if(Array.isArray(data)) {
+  if (Array.isArray(data)) {
     let aditionsArray = [];
     for (let item of data) {
       aditionsArray.push(createSingle(item, Lab));
@@ -87,7 +92,7 @@ let createSingle = (data, LabSchema) => {
   return new Promise((resolve, reject) => {
     let newLab = new LabSchema(data);
     newLab.save((err) => {
-      if(err) {
+      if (err) {
         reject({ isSuccess: false, err });
       } else {
         resolve({ isSuccess: true, laboratorio: common.fixResponseData(newLab) });
@@ -97,6 +102,8 @@ let createSingle = (data, LabSchema) => {
 };
 
 exports.updateLab = (req, res) => {
+  // #swagger.tags = ['Laboratorios']
+
   let data = req.body;
   let id = req.params.id;
 
@@ -116,11 +123,13 @@ exports.updateLab = (req, res) => {
 };
 
 exports.findById = (req, res) => {
+  // #swagger.tags = ['Laboratorios']
+
   let id = req.params.id;
   Lab.find({ "_id": id }).exec(function (err, data) {
     if (err) {
-      if(err.reason && Object.keys(err.reason).length === 0) {
-          res.status(404).send();
+      if (err.reason && Object.keys(err.reason).length === 0) {
+        res.status(404).send();
       } else {
         res.status(500).send(err);
       }
