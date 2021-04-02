@@ -48,7 +48,7 @@ let createSingle = (data, LabExamSchema) => {
 
 exports.findById = (req, res) => {
   let id = req.params.id;
-  LabExam.find({ "_id": id }).populate('laboratorio').populate('exame').exec(function (err, data) {
+  LabExam.find({ "_id": id }).populate('laboratorioId').populate('exameId').exec(function (err, data) {
     if (err) {
       if(err.reason && Object.keys(err.reason).length === 0) {
           res.status(404).send();
@@ -120,7 +120,9 @@ exports.findExamsByNome = (req, res) => {
               if (err) {
                 reject(err);
               } else {
-                examObject.laboratorios_associados.push(common.fixResponseData(labExamsFound));
+                for(le of labExamsFound) {
+                  examObject.laboratorios_associados.push(common.fixResponseData(le.laboratorioId))
+                }
                 resolve(examObject);
               }
             });
