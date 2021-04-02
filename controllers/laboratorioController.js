@@ -3,8 +3,20 @@ const common = require("../common/common");
 
 exports.getAllLabs = (req, res) => {
   // #swagger.tags = ['Laboratorios']
+  // #swagger.description = 'Endpoint usado para obter uma lista de laboratorios, podendo ser todos ou filtrado.'
+  /* #swagger.parameters['removido'] = {
+                in: 'query',
+                type: "string",
+                description: "Indicador de laboratorio removido"
+        } 
+    #swagger.parameters['status'] = {
+                in: 'query',
+                type: "string",
+                description: "Status ativo ou inativo"
+        } 
+  */
 
-  let filter = Object.assign({}, 
+    let filter = Object.assign({}, 
     (req.query.removido)? { removido: req.query.removido } : { removido: false },
     (req.query.status) && { status: req.query.status },
     (req.query.nome) && { nome: req.query.nome }
@@ -39,6 +51,7 @@ exports.getAllLabs = (req, res) => {
 
 exports.deleteLab = (req, res) => {
   // #swagger.tags = ['Laboratorios']
+  // #swagger.description = 'Endpoint usado para remover logicamente um laboratório.'
 
   let data = { removido: true };
   let id = req.params.id;
@@ -59,6 +72,7 @@ exports.deleteLab = (req, res) => {
 
 exports.createLab = (req, res) => {
   // #swagger.tags = ['Laboratorios']
+  // #swagger.description = 'Endpoint usado para criar um laboratório.'
 
   let data = req.body;
 
@@ -103,6 +117,7 @@ let createSingle = (data, LabSchema) => {
 
 exports.updateLab = (req, res) => {
   // #swagger.tags = ['Laboratorios']
+  // #swagger.description = 'Endpoint usado para atualizar um laboratório.'
 
   let data = req.body;
   let id = req.params.id;
@@ -124,6 +139,9 @@ exports.updateLab = (req, res) => {
 
 exports.findById = (req, res) => {
   // #swagger.tags = ['Laboratorios']
+  // #swagger.operationId = 'id'
+  //  #swagger.parameters['id'] = { description: "ID do laboratório" }
+  // #swagger.description = 'Endpoint usado para um laboratório fornecendo seu id.'
 
   let id = req.params.id;
   Lab.find({ "_id": id }).exec(function (err, data) {
