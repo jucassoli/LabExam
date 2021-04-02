@@ -98,7 +98,7 @@ exports.createLab = (req, res) => {
                 in: 'body',
                 type: "object",
                 description: "Indicador de laboratorio removido",
-                exemple: { test: 123 }
+                exemple: "{ test: 123 }"
         } 
 
   */
