@@ -8,7 +8,9 @@ exports.getAllExams = (req, res) => {
     #swagger.parameters['removido'] = {
                 in: 'query',
                 type: "string",
-                description: "Indicador de Exame removido"
+                description: "Indicador de Exame removido",
+                enum : [true, false]
+
         } 
     #swagger.parameters['status'] = {
                 in: 'query',

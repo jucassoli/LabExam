@@ -8,12 +8,14 @@ exports.getAllLabs = (req, res) => {
     #swagger.parameters['removido'] = {
                 in: 'query',
                 type: "string",
-                description: "Indicador de laboratorio removido"
+                description: "Indicador de laboratorio removido",
+                enum : [true, false]
         } 
     #swagger.parameters['status'] = {
                 in: 'query',
                 type: "string",
-                description: "Status ativo ou inativo"
+                description: "Status <code>ativo</code> ou <code>inativo</code>",
+                enum : ['ativo','inativo']
         } 
     #swagger.parameters['nome'] = {
                 in: 'query',
