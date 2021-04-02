@@ -48,7 +48,7 @@ let createSingle = (data, LabExamSchema) => {
 
 exports.findById = (req, res) => {
   let id = req.params.id;
-  LabExam.find({ "_id": id }).exec(function (err, data) {
+  LabExam.find({ "_id": id }).populate('laboratorio').populate('exame').exec(function (err, data) {
     if (err) {
       if(err.reason && Object.keys(err.reason).length === 0) {
           res.status(404).send();
@@ -87,7 +87,6 @@ exports.findExamsByNome = (req, res) => {
   }
 
   new Promise((resolve, reject) => {
-
     examSchema.exec(function (err, examsFound) {
       if (err) {
         reject(err); //res.status(500).send(err);
@@ -95,7 +94,6 @@ exports.findExamsByNome = (req, res) => {
         let mainExamsResponseArr = [];
         if (Array.isArray(examsFound) && examsFound.length > 0) {
           for(const oneExam of examsFound) {
-            console.log('--- Get the oneExam: ', oneExam);
             let examObject = common.fixResponseData(oneExam);
             Object.assign(examObject, { laboratorios_associados: [] });
             mainExamsResponseArr.push(examObject);
@@ -116,20 +114,20 @@ exports.findExamsByNome = (req, res) => {
         for (examObject of mainExamsResponseArr) {
           let exameId = examObject.id;
 
+          // Array of exams to search for
           examAssociationsProm.push(new Promise((resolve, reject) => {
-            LabExam.find({ exameId }).exec((err, labExamsFound) => {
+            LabExam.find({ exameId }).populate('laboratorio').exec((err, labExamsFound) => {
               if (err) {
-                reject();
+                reject(err);
               } else {
-                examObject.laboratorios_associados.push(labExamsFound);
-                console.log('---> resolving ', examObject);
+                examObject.laboratorios_associados.push(common.fixResponseData(labExamsFound));
                 resolve(examObject);
               }
             });
           }));
 
-          Promise.all(examAssociationsProm).then(examObjects => {
-            resolve(examObjects);
+          Promise.all(examAssociationsProm).then(examObjectsWithLA => {
+            resolve(examObjectsWithLA);
           });
 
         }
