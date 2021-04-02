@@ -6,6 +6,11 @@ API LabExam é uma aplicação NodeJs com Mongo DB que disponibiliza acessos a e
 
 A aplicação esta preparada e pre configurada para ser instalada e executada em container Docker. Primeiro use o Git para baixar a aplicação do repositório.
 
+## Prerequisites
+Make sure you have installed all of the following prerequisites on your development machine:
+* Git - [Download & Install Git](https://git-scm.com/downloads). OSX e maquinas Linux tipicamente já vem instalado.
+* Docker e Dockercompose - [Download & Install Git](https://docs.docker.com/get-docker)
+
 ```bash
 git clone https://github.com/jucassoli/LabExam.git
 ```
@@ -24,6 +29,10 @@ A aplicação vem com swagger embarcado para documentação, basta acessar com o
 
 ```bash
 http://localhost:8081
+```
+Tambem segue com arquivo contendo uma collection do postman com exemplos de payload.
+```bash
+asdfasdf
 ```
 
 ## Contributing
