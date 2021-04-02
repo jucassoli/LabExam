@@ -116,7 +116,7 @@ exports.findExamsByNome = (req, res) => {
 
           // Array of exams to search for
           examAssociationsProm.push(new Promise((resolve, reject) => {
-            LabExam.find({ exameId }).populate('laboratorio').exec((err, labExamsFound) => {
+            LabExam.find({ exameId }).populate('laboratorioId').exec((err, labExamsFound) => {
               if (err) {
                 reject(err);
               } else {
