@@ -16,7 +16,7 @@ const doc = {
   produces: ['application/json'],
   tags: [
     {
-      "name": "Lab",
+      "name": "Laboratorios",
       "description": "Endpoints de acesso aos Laboratorios"
     },
     {
