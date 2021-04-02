@@ -61,6 +61,21 @@ exports.findById = (req, res) => {
   });
 };
 
+exports.deleteAssociacao = (req, res) => {
+  let id = req.params.id;
+  LabExam.findByIdAndDelete(id, function (err, data) {
+    if (err) {
+      if(err.reason && Object.keys(err.reason).length === 0) {
+          res.status(404).send();
+      } else {
+        res.status(500).send(err);
+      }
+    } else {
+      res.status(200).json(common.fixResponseData(data));
+    }
+  });
+};
+
 exports.findAll = (req, res) => {
   LabExam.find().populate('laboratorioId').populate('exameId').exec(function (err, data) {
     if (err) {
@@ -83,8 +98,6 @@ exports.findExamsByNome = (req, res) => {
     (req.query.tipo) && { tipo: req.query.tipo },
     (req.query.nome) && { nome: req.query.nome }
   );
-
-  console.log('-- Filter: ', filter);
 
   let examSchema = Exame.find(filter);
 
@@ -139,47 +152,12 @@ exports.findExamsByNome = (req, res) => {
               }
             });
           });
-
       });
 
       Promise.all(examElementsProms).then((resultArr) => {
         resolve(resultArr);
       });
     });
-
-
-
-    /*
-        new Promise((resolve, reject) => {
-          let examAssociationsProm = [];
-          if (mainExamsResponseArr.length > 0) {
-            for (examObject of mainExamsResponseArr) {
-              let exameId = examObject.id;
-    
-              // Array of exams to search for
-              examAssociationsProm.push(new Promise((resolve, reject) => {
-                LabExam.find({ exameId }).populate('laboratorioId').exec((err, labExamsFound) => {
-                  if (err) {
-                    reject(err);
-                  } else {
-                    for(le of labExamsFound) {
-                      examObject.laboratorios_associados.push(common.fixResponseData(le.laboratorioId[0]))
-                    }
-                    resolve(examObject);
-                  }
-                });
-              }));
-    
-              Promise.all(examAssociationsProm).then(examObjectsWithLA => {
-                resolve(examObjectsWithLA);
-              });
-    
-            }
-          } else {
-            resolve(mainExamsResponseArr);
-          }
-        });
-    */
 
   }).then(result => {
     res.status(200).json(result);
