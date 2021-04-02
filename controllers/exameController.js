@@ -77,6 +77,9 @@ exports.getAllExams = (req, res) => {
 
 exports.deleteExam = (req, res) => {
   // #swagger.tags = ['Exames']
+  // #swagger.description = 'Endpoint usado para remover logicamente um Exame.'
+  // #swagger.operationId = 'id'
+  // #swagger.parameters['id'] = { description: "ID do Exame" }
 
   let data = { removido: true };
   let id = req.params.id;
@@ -97,6 +100,7 @@ exports.deleteExam = (req, res) => {
 
 exports.createExam = (req, res) => {
   // #swagger.tags = ['Exames']
+  // #swagger.description = 'Endpoint usado para criar um Exame ou criação em lote.'
 
   let data = req.body;
 
@@ -141,6 +145,9 @@ let createSingle = (data, ExamSchema) => {
 
 exports.updateExam = (req, res) => {
   // #swagger.tags = ['Exames']
+  // #swagger.description = 'Endpoint usado para atualizar um Exame.'
+  // #swagger.operationId = 'id'
+  // #swagger.parameters['id'] = { description: "ID do Exame" }
 
   let data = req.body;
   let id = req.params.id;
@@ -162,6 +169,9 @@ exports.updateExam = (req, res) => {
 
 exports.findById = (req, res) => {
   // #swagger.tags = ['Exames']
+  // #swagger.operationId = 'id'
+  // #swagger.parameters['id'] = { description: "ID do Exame" }
+  // #swagger.description = 'Endpoint usado para um Exame fornecendo seu id.'
 
   let id = req.params.id;
   Exame.find({ "_id": id }).exec(function (err, data) {

@@ -93,15 +93,7 @@ exports.deleteLab = (req, res) => {
 exports.createLab = (req, res) => {
   // #swagger.tags = ['Laboratorios']
   // #swagger.description = 'Endpoint usado para criar um laboratório ou criação em lote.'
-  /* 
-    #swagger.parameters['requestBody'] = {
-                in: 'body',
-                type: "object",
-                description: "Indicador de laboratorio removido",
-                exemple: "{ test: 123 }"
-        } 
 
-  */
   let data = req.body;
 
   if (Array.isArray(data)) {

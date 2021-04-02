@@ -92,15 +92,7 @@
           "Laboratorios"
         ],
         "description": "Endpoint usado para criar um laboratório ou criação em lote.",
-        "parameters": [
-          {
-            "name": "requestBody",
-            "in": "body",
-            "type": "object",
-            "description": "Indicador de laboratorio removido",
-            "exemple": "{ test: 123 }"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "201": {
             "description": "Created"
@@ -263,7 +255,7 @@
         "tags": [
           "Exames"
         ],
-        "description": "",
+        "description": "Endpoint usado para criar um Exame ou criação em lote.",
         "parameters": [],
         "responses": {
           "201": {
@@ -283,13 +275,15 @@
         "tags": [
           "Exames"
         ],
-        "description": "",
+        "description": "Endpoint usado para um Exame fornecendo seu id.",
+        "operationId": "id",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID do Exame"
           }
         ],
         "responses": {
@@ -305,13 +299,15 @@
         "tags": [
           "Exames"
         ],
-        "description": "",
+        "description": "Endpoint usado para atualizar um Exame.",
+        "operationId": "id",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID do Exame"
           }
         ],
         "responses": {
@@ -330,13 +326,15 @@
         "tags": [
           "Exames"
         ],
-        "description": "",
+        "description": "Endpoint usado para remover logicamente um Exame.",
+        "operationId": "id",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "ID do Exame"
           }
         ],
         "responses": {
