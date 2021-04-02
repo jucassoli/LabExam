@@ -86,54 +86,63 @@ exports.findExamsByNome = (req, res) => {
     examSchema.limit(limit).skip(limit * page);
   }
 
-  examSchema.exec(function (err, examsFound) {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      let allExamsObjFound = [];
-      if (Array.isArray(examsFound) && examsFound.length > 0) {
-        examsFound.forEach(oneExam => {
-          console.log('--- Get the oneExam: ', oneExam);
-          let examObject = common.fixResponseData(oneExam);
-          Object.assign(examObject, { laboratorios_associados: [] });
-          allExamsObjFound.push(examObject);
-        });
+  new Promise((resolve, reject) => {
+
+    examSchema.exec(function (err, examsFound) {
+      if (err) {
+        reject(err); //res.status(500).send(err);
+      } else {
+        let mainExamsResponseArr = [];
+        if (Array.isArray(examsFound) && examsFound.length > 0) {
+          for(const oneExam of examsFound) {
+            console.log('--- Get the oneExam: ', oneExam);
+            let examObject = common.fixResponseData(oneExam);
+            Object.assign(examObject, { laboratorios_associados: [] });
+            mainExamsResponseArr.push(examObject);
+          }
+        }
+        if(mainExamsResponseArr.length == 0) {
+          reject('');
+        } {
+          resolve(mainExamsResponseArr);
+        }
       }
-      return allExamsObjFound;
-    }
-  }).then(resolve => {
-    console.log('---- Got then ', resolve);
+    });
 
-    res.json(resolve);
-  });
+  }).then(mainExamsResponseArr => {
+    return new Promise((resolve, reject) => {
+      let examAssociationsProm = [];
+      if (mainExamsResponseArr.length > 0) {
+        for (examObject of mainExamsResponseArr) {
+          let exameId = examObject.id;
 
-
-/*
-
-          LabExam.find({ exameId }).exec((err, labExamsFound) => {
-            if (err) {
-              // Didn't find anything, move foward.
-            } else {
-              console.log('--- Found labExamsFound: ', labExamsFound);
-
-              if (Array.isArray(labExamsFound) && labExamsFound.length > 0) {
-
-                let resultLabs = [];
-                labExamsFound.forEach(oneLabExam => {
-                  console.log('--- Found oneLabExam: ', oneLabExam)
-                  let laboratorioId = oneLabExam.laboratorioId;
-                  Lab.findById(laboratorioId).exec(oneLabFound => {
-                    resultLabs.push(common.fixResponseData(oneLabFound));
-                  });
-                });
-
-                Object.assign(examObject, { laboratorios_associados: resultLabs });
-                console.log('--- Done examObject: ', examObject)
-                allExamsObjFound.push(examObject);
+          examAssociationsProm.push(new Promise((resolve, reject) => {
+            LabExam.find({ exameId }).exec((err, labExamsFound) => {
+              if (err) {
+                reject();
+              } else {
+                examObject.laboratorios_associados.push(labExamsFound);
+                console.log('---> resolving ', examObject);
+                resolve(examObject);
               }
-            }
+            });
+          }));
+
+          Promise.all(examAssociationsProm).then(examObjects => {
+            resolve(examObjects);
           });
 
-*/
+        }
+      } else {
+        resolve(mainExamsResponseArr);
+      }
+
+    });
+  }).then(result => {
+    res.status(200).json(result);
+  }).catch(err => {
+    res.status(500).json(err);
+  });
+
 
 };
