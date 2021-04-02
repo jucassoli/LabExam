@@ -9,7 +9,7 @@ A aplicação esta preparada e pre configurada para ser instalada e executada em
 ### Pre-requisitos
 Make sure you have installed all of the following prerequisites on your development machine:
 * Git - [Download & Install Git](https://git-scm.com/downloads). OSX e maquinas Linux tipicamente já vem instalado.
-* Docker e Dockercompose - [Download & Install Git](https://docs.docker.com/get-docker)
+* Docker e Docker Compose - [Download & Install Docker](https://docs.docker.com/get-docker)
 
 ### Procedimentos
 Primeiro use o Git para baixar a aplicação do repositório.
@@ -25,20 +25,19 @@ E para executar subir o servidor da aplicação com o MongDB execute
 docker-compose up
 ```
 
-
 ## Usage
 A aplicação vem com swagger embarcado para documentação, basta acessar com o browser com o endereço de instalação. (A porta padrão configurada é 8081)
 
 ```bash
 http://localhost:8081
 ```
-Tambem segue com arquivo contendo uma collection do postman com exemplos de payload.
+Tambem segue com arquivo contendo uma collection do postman ([Download & Install Postman](https://www.postman.com/downloads)) com exemplos de payload.
 ```bash
-asdfasdf
+./LabExams-API.postman_collection.json
 ```
 
 ## Contributing
-Não aberto a contribuição
+Not Available
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
