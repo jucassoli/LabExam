@@ -122,15 +122,13 @@ exports.findExamsByNome = (req, res) => {
     });
 
   }).then(mainExamsResponseArr => {
-    return new Promise((resolve, reject) => {
-      let examAssociationsProm = [];
-      if (mainExamsResponseArr.length > 0) {
-        for (examObject of mainExamsResponseArr) {
-          let exameId = examObject.id;
 
-          // Array of exams to search for
-          examAssociationsProm.push(new Promise((resolve, reject) => {
-            LabExam.find({ exameId }).populate('laboratorioId').exec((err, labExamsFound) => {
+    return new Promise((resolve, reject) => { 
+      
+      let examElementsProms = mainExamsResponseArr.map(examObject => { 
+          // map each exam with its labexams
+          return new Promise((resolve, reject) => {
+            LabExam.find({ exameId: examObject.id }).populate('laboratorioId').exec((err, labExamsFound) => {
               if (err) {
                 reject(err);
               } else {
@@ -140,18 +138,49 @@ exports.findExamsByNome = (req, res) => {
                 resolve(examObject);
               }
             });
-          }));
-
-          Promise.all(examAssociationsProm).then(examObjectsWithLA => {
-            resolve(examObjectsWithLA);
           });
 
-        }
-      } else {
-        resolve(mainExamsResponseArr);
-      }
+      });
 
+      Promise.all(examElementsProms).then((resultArr) => {
+        resolve(resultArr);
+      });
     });
+
+
+
+    /*
+        new Promise((resolve, reject) => {
+          let examAssociationsProm = [];
+          if (mainExamsResponseArr.length > 0) {
+            for (examObject of mainExamsResponseArr) {
+              let exameId = examObject.id;
+    
+              // Array of exams to search for
+              examAssociationsProm.push(new Promise((resolve, reject) => {
+                LabExam.find({ exameId }).populate('laboratorioId').exec((err, labExamsFound) => {
+                  if (err) {
+                    reject(err);
+                  } else {
+                    for(le of labExamsFound) {
+                      examObject.laboratorios_associados.push(common.fixResponseData(le.laboratorioId[0]))
+                    }
+                    resolve(examObject);
+                  }
+                });
+              }));
+    
+              Promise.all(examAssociationsProm).then(examObjectsWithLA => {
+                resolve(examObjectsWithLA);
+              });
+    
+            }
+          } else {
+            resolve(mainExamsResponseArr);
+          }
+        });
+    */
+
   }).then(result => {
     res.status(200).json(result);
   }).catch(err => {
