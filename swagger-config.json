@@ -43,13 +43,21 @@
             "name": "removido",
             "in": "query",
             "type": "string",
-            "description": "Indicador de laboratorio removido"
+            "description": "Indicador de laboratorio removido",
+            "enum": [
+              true,
+              false
+            ]
           },
           {
             "name": "status",
             "in": "query",
             "type": "string",
-            "description": "Status ativo ou inativo"
+            "description": "Status <code>ativo</code> ou <code>inativo</code>",
+            "enum": [
+              "ativo",
+              "inativo"
+            ]
           },
           {
             "name": "nome",
@@ -189,7 +197,11 @@
             "name": "removido",
             "in": "query",
             "type": "string",
-            "description": "Indicador de Exame removido"
+            "description": "Indicador de Exame removido",
+            "enum": [
+              true,
+              false
+            ]
           },
           {
             "name": "status",
